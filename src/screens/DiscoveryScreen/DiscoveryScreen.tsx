@@ -3,7 +3,6 @@ import {
   View,
   Text,
   ScrollView,
-  TextInput,
   FlatList,
   Image,
   ImageBackground,
@@ -14,12 +13,10 @@ import {
   IconMenu,
   IconMessage,
   IconNotification,
-  IconSearch,
   IconStar,
 } from '../../assets/icons';
 import styles from './styles';
 import images from '../../assets/images';
-import {useNavigation} from '@react-navigation/native';
 import topicFollows from '../../models/TopicFollow';
 import product from '../../models/Product';
 import expert from '../../models/Expert';
@@ -33,6 +30,12 @@ import ListPostTrend from '../../components/ListPostTrend/ListPostTrend';
 import ListCourseTrend from '../../components/ListCourseTrend/ListCourseTrend';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamsList} from '../../../App';
+import InputSearch from '../../components/InputSearch/InputSearch';
+import listCourseTrend from '../../components/Data/listCourseTrend';
+import listProduct from '../../components/Data/listProduct';
+import ListProduct from '../../components/ListProduct/ListProduct';
+import FFilled from '../../components/Icons/FFilled';
+import FIcon from '../../components/Icons/FIcon';
 
 const listTopicFollow: Array<topicFollows> = [
   {index: 0, image: images.imageTopic1, name: 'Interaction Design'},
@@ -43,41 +46,6 @@ const listTopicFollow: Array<topicFollows> = [
   {index: 5, image: images.imageTopic6, name: 'Software Development'},
   {index: 6, image: images.imageTopic7, name: 'Web & App Design'},
   {index: 7, image: images.imageTopic8, name: 'Architecture & Spaces'},
-];
-
-const listProduct: Array<product> = [
-  {
-    index: 0,
-    image: images.imageProduct,
-    title: 'Columbia Men’s Bahama from Education Library Vent PFG Boat Shoe',
-    avatar: images.imageAvatar,
-    fullname: 'Phan Minh Anh',
-    rate: '4.9 / 1321 Sales',
-    priceSale: 565.0,
-    priceOrigin: 797.0,
-  },
-
-  {
-    index: 1,
-    image: images.imageProduct,
-    title: 'Columbia Men’s Bahama from Education Library Vent PFG Boat Shoe',
-    avatar: images.imageAvatar,
-    fullname: 'Phan Minh Anh',
-    rate: '4.9 / 1321 Sales',
-    priceSale: 565.0,
-    priceOrigin: 797.0,
-  },
-
-  {
-    index: 2,
-    image: images.imageProduct,
-    title: 'Columbia Men’s Bahama from Education Library Vent PFG Boat Shoe',
-    avatar: images.imageAvatar,
-    fullname: 'Phan Minh Anh',
-    rate: '4.9 / 1321 Sales',
-    priceSale: 565.0,
-    priceOrigin: 797.0,
-  },
 ];
 
 const listExpert: Array<expert> = [
@@ -132,12 +100,12 @@ const DiscoveryScreen = ({navigation}: Props) => {
                 9
               </Text>
             </View>
+            <FIcon icon={FFilled.logo_dribble} size={100} />
           </View>
         </View>
-        <View style={styles.bottomAppBar}>
-          <IconSearch />
-          <TextInput placeholder="Tìm kiếm" style={styles.textInputSearch} />
-        </View>
+        <TouchableOpacity onPress={() => navigation.navigate('Search')}>
+          <InputSearch editable={false} />
+        </TouchableOpacity>
       </View>
       {/* Body */}
       <ScrollView
@@ -180,97 +148,7 @@ const DiscoveryScreen = ({navigation}: Props) => {
             ]}>
             Sản phẩm nổi bật trên Ebig
           </Text>
-          <FlatList
-            horizontal
-            scrollEnabled={true}
-            data={listProduct}
-            showsHorizontalScrollIndicator={false}
-            renderItem={({item}) => (
-              <View
-                style={{
-                  marginLeft: 16,
-                  marginRight: item.index == listProduct.length - 1 ? 16 : 8,
-                  marginTop: 24,
-                  width: 163,
-                }}>
-                <Image
-                  source={item.image}
-                  style={{height: 122, width: '100%', borderRadius: 8}}
-                />
-                <Text
-                  style={[
-                    titleTypographyMobile.title5,
-                    {color: 'rgba(255, 255, 255, 1)', marginTop: 4},
-                  ]}
-                  numberOfLines={2}
-                  ellipsizeMode="tail">
-                  {item.title}
-                </Text>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    marginTop: 4,
-                    alignItems: 'center',
-                  }}>
-                  <Image
-                    source={item.avatar}
-                    style={[styles.avatar, {width: 20, height: 20}]}
-                  />
-                  <Text
-                    style={[
-                      styles.fullname,
-                      {
-                        color: 'rgba(255, 255, 255, 0.8)',
-                      },
-                      subtitleTypography.subtitle3,
-                    ]}>
-                    {item.fullname}
-                  </Text>
-                </View>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    marginTop: 4,
-                    alignItems: 'center',
-                  }}>
-                  <IconStar />
-                  <Text
-                    style={[
-                      styles.fullname,
-                      {
-                        color: 'rgba(255, 255, 255, 0.8)',
-                      },
-                      buttonTextTypography.buttonText5,
-                    ]}>
-                    {item.rate}
-                  </Text>
-                </View>
-                <View style={{flexDirection: 'row', marginTop: 12}}>
-                  <Text
-                    style={[
-                      titleTypographyMobile.title5,
-                      {
-                        marginRight: 4,
-                        color: 'rgba(255, 255, 255, 1)',
-                      },
-                    ]}>
-                    {item.priceSale.toFixed(3)}đ
-                  </Text>
-                  <Text
-                    style={[
-                      titleTypographyMobile.title5,
-                      {
-                        color: 'rgba(255, 255, 255, 0.8)',
-                        textDecorationLine: 'line-through',
-                      },
-                    ]}>
-                    {item.priceOrigin.toFixed(3)}đ
-                  </Text>
-                </View>
-              </View>
-            )}
-            keyExtractor={(item, index) => index.toString()}
-          />
+          <ListProduct listProduct={listProduct} horizontal={true} />
           <View
             style={[
               styles.buttonMore,
@@ -285,7 +163,15 @@ const DiscoveryScreen = ({navigation}: Props) => {
             </Text>
           </View>
         </View>
-        {ListCourseTrend('Khóa học xu hướng')}
+        <View style={styles.courseTrend}>
+          <Text style={[titleTypographyMobile.title2, styles.titlePostTrend]}>
+            Khoá học xu hướng
+          </Text>
+          <ListCourseTrend
+            listCourseTrend={listCourseTrend}
+            scrollEnabled={false}
+          />
+        </View>
         <View style={styles.leadingExperts}>
           <Text
             style={[

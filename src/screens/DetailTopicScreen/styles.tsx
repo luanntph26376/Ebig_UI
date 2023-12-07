@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     paddingHorizontal: 24,
     backgroundColor: 'white',
-    elevation: 5, 
+    elevation: 5,
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 4},
     shadowOpacity: 0.2,
@@ -187,6 +187,7 @@ const styles = StyleSheet.create({
   courseTrend: {
     paddingTop: 32,
     paddingHorizontal: 16,
+    paddingBottom: 24,
   },
 
   titlePostTrend: {
