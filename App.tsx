@@ -32,6 +32,7 @@ import DetailTopicOtherScreen from './src/screens/DetailTopicOther/DetailTopicOt
 import MorePostTrendScreen from './src/screens/MorePostTrendScreen/MorePostTrendScreen';
 import TopExpertScreen from './src/screens/TopExpertScreen/TopExpertScreen';
 import DetailCategoryPostScreen from './src/screens/DetailCategoryPostScreen/DetailCategoryPostScreen';
+import SearchScreen from './src/screens/SearchScreen/SearchScreen';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -111,6 +112,7 @@ export type RootStackParamsList = {
   MorePostTrend: undefined | {title: string};
   TopExpert: undefined | {title: string};
   DetailCategoryPost: undefined | {title: string};
+  Search: undefined | {title: string};
 };
 
 const Stack = createNativeStackNavigator<RootStackParamsList>();
@@ -131,6 +133,7 @@ const App = () => {
           name="DetailCategoryPost"
           component={DetailCategoryPostScreen}
         />
+        <Stack.Screen name="Search" component={SearchScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

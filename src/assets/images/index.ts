@@ -22,6 +22,7 @@ const images = {
   imageCourse: require('./img_course.png'),
   imageExpert: require('./img_expert.jpg'),
   imageTopicOther: require('./img_topic_other.jpg'),
+  imageProduct_2: require('./img_product_2.png'),
 };
 
 export default images;

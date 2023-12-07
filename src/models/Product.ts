@@ -7,8 +7,10 @@ type product = {
   avatar: ImageProps;
   fullname: string;
   rate: string;
-  priceSale: number;
+  priceSale?: number;
   priceOrigin: number;
+  datetime?: string;
+  follow?: string;
 };
 
 export default product;

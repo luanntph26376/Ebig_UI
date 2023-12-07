@@ -11,6 +11,10 @@ import IconStar from './icon_star.svg';
 import IconPersonOutline from './icon_person_outline.svg';
 import IconStarOutline from './icon_star_outline.svg';
 import IconBack from './icon_back.svg';
+import IconClear from './icon_clear.svg';
+import IconDelete from './icon_delete.svg';
+import IconTopic from './icon_topic.svg';
+import IconCartFilled from './icon_cart_filled.svg';
 
 export {
   IconMenu,
@@ -26,4 +30,8 @@ export {
   IconPersonOutline,
   IconStarOutline,
   IconBack,
+  IconClear,
+  IconDelete,
+  IconTopic,
+  IconCartFilled,
 };

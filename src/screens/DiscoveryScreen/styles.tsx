@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
 
   appBar: {
     backgroundColor: 'white',
-    elevation: 5, 
+    elevation: 5,
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 4},
     shadowOpacity: 0.2,
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   topAppBar: {
     flexDirection: 'row',
     paddingVertical: 12,
-    paddingHorizontal: 16,
+    paddingHorizontal: 24,
     alignItems: 'center',
   },
 
@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
     maxHeight: 32,
     padding: 0,
     marginLeft: 8,
+    color: 'rgba(0, 32, 77, 0.9)',
   },
 
   topicFollows: {

@@ -18,56 +18,12 @@ import ListPostTrend from '../../components/ListPostTrend/ListPostTrend';
 import ListCourseTrend from '../../components/ListCourseTrend/ListCourseTrend';
 import {RootStackParamsList} from '../../../App';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-
-const listTopicOther: Array<topicFollows> = [
-  {index: 0, image: images.imageTopicOther, name: 'Product Design'},
-  {index: 1, image: images.imageTopicOther, name: 'User Research'},
-  {index: 2, image: images.imageTopicOther, name: 'User Research'},
-];
-
-const listPostMostReader: Array<postMostReader> = [
-  {
-    index: 0,
-    avatar: images.imageAvatar,
-    fullname: 'Phan Minh Anh',
-    title: 'Website Design Tips & Inspiration',
-    totalPost: 10,
-    totalPostSaved: 100,
-  },
-  {
-    index: 1,
-    avatar: images.imageAvatar,
-    fullname: 'Phan Minh Anh',
-    title: 'Website Design Tips & Inspiration',
-    totalPost: 10,
-    totalPostSaved: 100,
-  },
-  {
-    index: 2,
-    avatar: images.imageAvatar,
-    fullname: 'Phan Minh Anh',
-    title: 'Website Design Tips & Inspiration',
-    totalPost: 10,
-    totalPostSaved: 100,
-  },
-];
-
-const listTopExpert: Array<expert> = [
-  {
-    index: 0,
-    image: images.imageAvatar,
-    fullname: 'Phan Minh Anh',
-    major: 'I am Java programmer, blogger, working on Java, J2EE, UNI...',
-    followers: 375,
-  },
-  {
-    index: 1,
-    image: images.imageAvatar2,
-    fullname: 'Tran Trung',
-    major: 'I am Java programmer, blogger, working on Java, J2EE, UNI...',
-    followers: 375,
-  },
-];
+import listTopicOther from '../../components/Data/listTopicOther';
+import listPostMostReader from '../../components/Data/listPostMostReader';
+import listTopExpert from '../../components/Data/listTopExpert';
+import ListPostMostReader from '../../components/ListPostMostReader/ListPostMostReader';
+import {titleTypographyMobile} from '../../components/Typography/typo_skin';
+import listCourseTrend from '../../components/Data/listCourseTrend';
 
 type Props = NativeStackScreenProps<RootStackParamsList, 'DetailTopic'>;
 
@@ -180,110 +136,9 @@ const DetailTopicScreen = ({navigation, route}: Props) => {
             }}>
             Danh mục bài viết nhiều người đọc
           </Text>
-          <FlatList
+          <ListPostMostReader
+            listPostMostReader={listPostMostReader}
             scrollEnabled={false}
-            data={listPostMostReader}
-            renderItem={({item}) => (
-              <TouchableOpacity
-                style={{
-                  marginTop: 24,
-                }}
-                onPress={() => {
-                  navigation.navigate('DetailCategoryPost');
-                }}>
-                <View
-                  style={{
-                    backgroundColor: 'rgba(242, 245, 248, 1)',
-                    borderColor: 'rgba(0, 53, 128, 0.08)',
-                    borderWidth: 1,
-                    borderRadius: 8,
-                    overflow: 'hidden',
-                  }}>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      marginLeft: 16,
-                      marginTop: 16,
-                      marginBottom: 12,
-                    }}>
-                    <Image source={item.avatar} style={styles.avatar} />
-                    <Text style={styles.fullname}>{item.fullname}</Text>
-                  </View>
-                  <View style={{marginHorizontal: 16}}>
-                    <Text style={styles.title}>{item.title}</Text>
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                      }}>
-                      <View
-                        style={{
-                          flexDirection: 'row',
-                          flex: 1,
-                          marginRight: 8,
-                          marginBottom: 12,
-                        }}>
-                        <Text
-                          style={{
-                            fontSize: 14,
-                            fontWeight: '400',
-                            lineHeight: 22,
-                            color: 'rgba(0, 32, 77, 0.6)',
-                          }}>
-                          {item.totalPost} Bài viết
-                        </Text>
-                        <Text
-                          style={{
-                            fontSize: 14,
-                            fontWeight: '400',
-                            lineHeight: 22,
-                            color: 'rgba(0, 32, 77, 0.6)',
-                            marginHorizontal: 4,
-                          }}>
-                          ·
-                        </Text>
-                        <Text
-                          style={{
-                            fontSize: 14,
-                            fontWeight: '400',
-                            lineHeight: 22,
-                            color: 'rgba(0, 32, 77, 0.6)',
-                          }}>
-                          {item.totalPostSaved} Đã lưu
-                        </Text>
-                      </View>
-                      <IconSave />
-                    </View>
-                  </View>
-                  <ScrollView
-                    scrollEnabled={true}
-                    horizontal
-                    showsHorizontalScrollIndicator={false}>
-                    <Image
-                      source={images.imagePost3}
-                      style={{height: 122, width: 163, marginRight: 4}}
-                    />
-                    <Image
-                      source={images.imagePost2}
-                      style={{height: 122, width: 163, marginRight: 4}}
-                    />
-                    <Image
-                      source={images.imagePost3}
-                      style={{height: 122, width: 163}}
-                    />
-                  </ScrollView>
-                </View>
-                {item.index == listPostMostReader.length - 1 ? (
-                  <TouchableOpacity
-                    style={[styles.buttonMore, {marginTop: 24}]}>
-                    <Text style={styles.textButtonMore}>Xem thêm</Text>
-                  </TouchableOpacity>
-                ) : (
-                  <View style={[styles.divider, {marginTop: 24}]}></View>
-                )}
-              </TouchableOpacity>
-            )}
-            keyExtractor={(item, index) => index.toString()}
           />
         </View>
         <View style={styles.topExpert}>
@@ -338,7 +193,7 @@ const DetailTopicScreen = ({navigation, route}: Props) => {
                       color: 'rgba(0, 32, 77, 0.6)',
                       marginTop: 4,
                     }}>
-                    {item.followers} Người theo dõi
+                    {item.followers ? item.followers : 0} Người theo dõi
                   </Text>
                   <Text
                     style={{
@@ -348,8 +203,10 @@ const DetailTopicScreen = ({navigation, route}: Props) => {
                       color: 'rgba(0, 32, 77, 0.8)',
                       marginTop: 12,
                       textAlign: 'center',
-                    }}>
-                    {item.major}
+                    }}
+                    numberOfLines={3}
+                    ellipsizeMode="tail">
+                    {item.major || item.about}
                   </Text>
                   <View
                     style={{
@@ -390,7 +247,15 @@ const DetailTopicScreen = ({navigation, route}: Props) => {
             </Text>
           </TouchableOpacity>
         </View>
-        {ListCourseTrend('Học tập cùng chuyên gia')}
+        <View style={styles.courseTrend}>
+          <Text style={[titleTypographyMobile.title2, styles.titlePostTrend]}>
+            Học tập cùng chuyên gia
+          </Text>
+          <ListCourseTrend
+            listCourseTrend={listCourseTrend}
+            scrollEnabled={false}
+          />
+        </View>
       </ScrollView>
     </View>
   );
