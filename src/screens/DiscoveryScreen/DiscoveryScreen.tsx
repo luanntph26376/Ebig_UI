@@ -13,16 +13,13 @@ import {
   IconMenu,
   IconMessage,
   IconNotification,
-  IconStar,
 } from '../../assets/icons';
 import styles from './styles';
 import images from '../../assets/images';
 import topicFollows from '../../models/TopicFollow';
-import product from '../../models/Product';
 import expert from '../../models/Expert';
 import LinearGradient from 'react-native-linear-gradient';
 import {
-  buttonTextTypography,
   subtitleTypography,
   titleTypographyMobile,
 } from '../../components/Typography/typo_skin';
@@ -32,10 +29,10 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamsList} from '../../../App';
 import InputSearch from '../../components/InputSearch/InputSearch';
 import listCourseTrend from '../../components/Data/listCourseTrend';
-import listProduct from '../../components/Data/listProduct';
 import ListProduct from '../../components/ListProduct/ListProduct';
 import FFilled from '../../components/Icons/FFilled';
 import FIcon from '../../components/Icons/FIcon';
+import {listProduct} from '../../components/Data/listProduct';
 
 const listTopicFollow: Array<topicFollows> = [
   {index: 0, image: images.imageTopic1, name: 'Interaction Design'},
@@ -100,7 +97,7 @@ const DiscoveryScreen = ({navigation}: Props) => {
                 9
               </Text>
             </View>
-            <FIcon icon={FFilled.logo_dribble} size={100} />
+            {/* <FIcon icon={FFilled.logo_dribble} size={100} /> */}
           </View>
         </View>
         <TouchableOpacity onPress={() => navigation.navigate('Search')}>
