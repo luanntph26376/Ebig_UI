@@ -8,12 +8,14 @@ interface InputSearchProps {
   onTextChange?: (text: string) => void;
   autoFocus?: boolean;
   editable?: boolean;
+  value?: string;
 }
 
 const InputSearch: React.FC<InputSearchProps> = ({
   onTextChange,
   autoFocus,
   editable,
+  value,
 }) => {
   const [text, setText] = useState('');
   const [showClearButton, setShowClearButton] = useState(false);
@@ -44,7 +46,7 @@ const InputSearch: React.FC<InputSearchProps> = ({
     <View style={styleInputSearch}>
       <IconSearch />
       <TextInput
-        value={text}
+        value={text || value}
         placeholder="Tìm kiếm"
         style={[bodyTextTypography.bodyText2, styles.textInputSearch]}
         placeholderTextColor={'rgba(0, 32, 77, 0.4)'}

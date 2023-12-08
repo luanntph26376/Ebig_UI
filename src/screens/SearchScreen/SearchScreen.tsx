@@ -1,4 +1,4 @@
-import {View, Text, FlatList} from 'react-native';
+import {View, Text, FlatList, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 import {RootStackParamsList} from '../../../App';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
@@ -10,12 +10,12 @@ import {
   titleTypographyMobile,
 } from '../../components/Typography/typo_skin';
 import {SceneMap, TabBar, TabView} from 'react-native-tab-view';
-import PostTab from './tabs/PostTab';
-import CategoryPost from './tabs/CategoryPost';
-import ExpertTab from './tabs/ExpertTab';
-import TopicTab from './tabs/TopicTab';
-import CourseTab from './tabs/CourseTab';
-import ProductTab from './tabs/ProductTab';
+import PostTab from '../ResultSearchScreen/tabs/PostTab';
+import CategoryPost from '../ResultSearchScreen/tabs/CategoryPost';
+import ExpertTab from '../ResultSearchScreen/tabs/ExpertTab';
+import TopicTab from '../ResultSearchScreen/tabs/TopicTab';
+import CourseTab from '../ResultSearchScreen/tabs/CourseTab';
+import ProductTab from '../ResultSearchScreen/tabs/ProductTab';
 import listPostTrend from '../../components/Data/listPostTrend';
 import listPostMostReader from '../../components/Data/listPostMostReader';
 import listTopExpert from '../../components/Data/listTopExpert';
@@ -40,7 +40,7 @@ const renderScene = SceneMap({
   product: ProductTab,
 });
 
-const SearchScreen = ({navigation}: Props) => {
+const SearchScreen = ({navigation, route}: Props) => {
   const [isHidden, setisHidden] = useState(true);
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
@@ -65,47 +65,49 @@ const SearchScreen = ({navigation}: Props) => {
         <InputSearch onTextChange={val => console.log(val)} autoFocus={true} />
       </View>
       {/* View 1 */}
-      {!isHidden && (
-        <View style={{paddingVertical: 24, paddingHorizontal: 16}}>
-          <Text
-            style={[
-              titleTypographyMobile.title2,
-              {color: 'rgba(0, 32, 77, 1)', marginBottom: 24},
-            ]}>
-            Tìm kiếm gần đây
-          </Text>
-          <FlatList
-            data={listHistorySearch}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({item}) => (
-              <View
-                style={{
-                  padding: 18,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                }}>
-                <IconSearch width={20} height={20} />
-                <Text
-                  style={[
-                    titleTypographyMobile.title4,
-                    {
-                      flex: 1,
-                      marginLeft: 12,
-                      marginRight: 16,
-                      color: 'rgba(0, 32, 77, 1)',
-                    },
-                  ]}>
-                  {item}
-                </Text>
-                <IconDelete width={16} height={16} />
-              </View>
-            )}
-          />
-        </View>
-      )}
+
+      <View style={{paddingVertical: 24, paddingHorizontal: 16}}>
+        <Text
+          style={[
+            titleTypographyMobile.title2,
+            {color: 'rgba(0, 32, 77, 1)', marginBottom: 24},
+          ]}>
+          Tìm kiếm gần đây
+        </Text>
+        <FlatList
+          data={listHistorySearch}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({item}) => (
+            <TouchableOpacity
+              style={{
+                padding: 18,
+                flexDirection: 'row',
+                alignItems: 'center',
+              }}
+              onPress={() =>
+                navigation.navigate('ResultSearch', {search: item})
+              }>
+              <IconSearch width={20} height={20} />
+              <Text
+                style={[
+                  titleTypographyMobile.title4,
+                  {
+                    flex: 1,
+                    marginLeft: 12,
+                    marginRight: 16,
+                    color: 'rgba(0, 32, 77, 1)',
+                  },
+                ]}>
+                {item}
+              </Text>
+              <IconDelete width={16} height={16} />
+            </TouchableOpacity>
+          )}
+        />
+      </View>
 
       {/* View 2 */}
-      <TabView
+      {/* <TabView
         navigationState={{index, routes}}
         renderScene={renderScene}
         onIndexChange={setIndex}
@@ -120,7 +122,7 @@ const SearchScreen = ({navigation}: Props) => {
             tabStyle={styles.tabStyle}
           />
         )}
-      />
+      /> */}
     </View>
   );
 };
